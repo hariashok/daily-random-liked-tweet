@@ -2,8 +2,11 @@ name: Daily Random Liked Tweet
 
 on:
   schedule:
-    - cron: "15 3 * * *"
-  workflow_dispatch: {}
+    # 00:00 UTC -> 05:30 IST
+    - cron: "0 0 * * *"
+    # 12:00 UTC -> 17:30 IST
+    - cron: "0 12 * * *"
+  workflow_dispatch: {}   # allows manual Run workflow
 
 jobs:
   run_script:
