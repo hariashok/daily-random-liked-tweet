@@ -41,7 +41,7 @@ def main():
         "Make today count:\n"
         "• Pick your top-1 task and work on it for 3 hours.\n"
         "• Small, consistent wins compound into big results.\n\n"
-        "Reminder sent by your Daily Bot — use this moment well."
+        "Reminder sent by your future self — use this moment well."
     )
 
     send_message(msg)
