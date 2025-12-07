@@ -37,7 +37,7 @@ def main():
     years, months, days = calculate_age()
 
     msg = (
-        f"⏳ Time is precious — you are {years} years, {months} months, {days} days old today.\n\n"
+        f"⏳ Time is precious — you are now {years} years, {months} months, {days} days old today.\n\n"
         "Make today count:\n"
         "• Pick your top-1 task and work on it for 3 hours.\n"
         "• Small, consistent wins compound into big results.\n\n"
