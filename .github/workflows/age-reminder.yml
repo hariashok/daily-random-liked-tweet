@@ -1,0 +1,28 @@
+name: Daily Age Reminder
+
+on:
+  schedule:
+    # 05:30 IST -> 00:00 UTC
+    - cron: "0 0 * * *"
+  workflow_dispatch: {}
+
+jobs:
+  send_age:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.11"
+
+    - name: Install dependencies
+      run: pip install requests
+
+    - name: Send age reminder
+      env:
+        TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+        TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+      run: python send_age_reminder.py
