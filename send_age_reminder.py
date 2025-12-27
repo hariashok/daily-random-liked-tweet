@@ -39,9 +39,11 @@ def main():
     msg = (
         f"⏳ Time is precious — you are now {years} years, {months} months, {days} days old today.\n\n"
         "Make today count:\n"
-        "• Pick your top-1 task and work on it for 3 hours.\n"
-        "• Small, consistent wins compound into big results.\n\n"
-        "Reminder sent by your future self — use this moment well."
+        " Pick your top-1 task and work on it for 3 hours.\n"
+        "Please dont slip this, even it is a bad start, "
+        "even if you have bad mood, dont slip,"
+        "may be sometime, a unsolvable production issue, or some deadline, dont slip.. "
+        "fight"
     )
 
     send_message(msg)
