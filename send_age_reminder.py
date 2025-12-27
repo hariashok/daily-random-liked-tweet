@@ -43,7 +43,7 @@ def main():
         "Please dont slip this, even it is a bad start, "
         "even if you have bad mood, dont slip,"
         "may be sometime, a unsolvable production issue, or some deadline, dont slip.. "
-        "fight"
+        "even if things go wrong, let's fight"
     )
 
     send_message(msg)
