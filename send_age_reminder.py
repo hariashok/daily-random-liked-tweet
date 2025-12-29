@@ -47,7 +47,11 @@ def main():
         "REMEMBER: no one is watching you (what you thing all time) ,\n"
         "REMEMBER: it gonna take 6 complete month, do it or don't time will pass anyway \n"
         "Please spend 2hr min daily, you can't make ton of progress, initially,\n"
-        "It will get better as time goes by\n"
+        "It will get better as time goes by\n\n\n"
+        "and\n\n"
+        "and\n\n"
+        "and\n\n"
+        "your very high priority is to switch the job. pls care about it"
     )
 
     send_message(msg)
