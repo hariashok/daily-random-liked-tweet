@@ -45,7 +45,7 @@ def main():
         "may be sometime, a unsolvable production issue, or some deadline, dont slip it please.. \n"
         "even if things go wrong, let's fight,\n"
         "REMEMBER: no one is watching you (what you thing all time) ,\n"
-        "REMEMBER: it gonna take 6 complete month, do it or don't time will pass anyway"
+        "REMEMBER: it gonna take 6 complete month, do it or don't time will pass anyway \n"
         "Please spend 2hr min daily, you can't make ton of progress, initially,\n"
         "It will get better as time goes by\n"
     )
