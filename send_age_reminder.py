@@ -39,7 +39,7 @@ def main():
     msg = (
         f"⏳ Time is precious — you are now {years} years, {months} months, {days} days old today.\n\n"
         "Make today count:\n"
-        "you're in private industry, so no job security, make sure you skilled"
+        "you're in private industry, so no job security, make sure you skilled "
         "Pick your top-1 priority and work on it for 3 hours.\n"
         "Please dont slip this, even it is a bad start, \n"
         "even if you have bad mood, dont slip,\n"
