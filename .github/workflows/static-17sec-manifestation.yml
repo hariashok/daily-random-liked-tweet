@@ -25,5 +25,6 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: python send_static_17sec_manifestation.py
-        # activate schedule
+        # scheduler reset
+
 
