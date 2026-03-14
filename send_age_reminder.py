@@ -54,7 +54,9 @@ def main():
         "and\n\n"
         "your very high priority is to switch the job. pls care about it.....\n\n"
         "Hari, if you don't actively shape the life you desire each day, \n "
-        "you'll eventually wake up to find that years have slipped by unnoticed"
+        "you'll eventually wake up to find that years have slipped by unnoticed..."
+        "After you read this, if no action has been taken, we can't save you.."
+        "SORRY"
     )
 
     send_message(msg)
