@@ -25,6 +25,11 @@ def main():
 
     file_path = "last_notified.txt"
 
+    print("Script started")
+
+url = f"https://codeforces.com/api/user.status?handle={HANDLE}&from=1&count=5"
+res = requests.get(url).json()
+print(res)
     try:
         with open(file_path, "r") as f:
             last_notified = f.read().strip()
