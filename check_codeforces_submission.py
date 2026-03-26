@@ -82,7 +82,6 @@ def main():
         send_message(message)
         write_last_notified(today_str)
 
-        # mark for commit (workflow will commit this file)
         print("NOTIFIED")
 
     else:
