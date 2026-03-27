@@ -30,38 +30,40 @@ def read_last_notified():
         return ""
 
 
-def write_last_notified(today_str):
+def write_last_notified(date_str):
     os.makedirs("state", exist_ok=True)
     with open(STATE_FILE, "w") as f:
-        f.write(today_str)
+        f.write(date_str)
 
 
 def main():
     now_ist = datetime.now(IST)
-    today = now_ist.date()
-    today_str = str(today)
+    today_str = str(now_ist.date())
+
+    # 🔥 KEY FIX: last 24 hours window
+    cutoff_time = now_ist - timedelta(hours=24)
 
     submissions = get_submissions()
     last_notified = read_last_notified()
 
-    found_today = None
+    found_recent = None
 
     for sub in submissions:
         ts = sub["creationTimeSeconds"]
         sub_dt = datetime.fromtimestamp(ts, IST)
 
-        if sub_dt.date() == today:
-            found_today = sub
+        if sub_dt >= cutoff_time:
+            found_recent = sub
             break
 
-    if found_today and last_notified != today_str:
-        problem = found_today["problem"]
+    if found_recent and last_notified != today_str:
+        problem = found_recent["problem"]
         problem_name = problem["name"]
         contest_id = problem.get("contestId", "N/A")
         problem_index = problem.get("index", "")
-        submission_id = found_today["id"]
+        submission_id = found_recent["id"]
 
-        sub_dt = datetime.fromtimestamp(found_today["creationTimeSeconds"], IST)
+        sub_dt = datetime.fromtimestamp(found_recent["creationTimeSeconds"], IST)
         time_str = sub_dt.strftime("%I:%M %p")
 
         if contest_id != "N/A":
@@ -72,7 +74,7 @@ def main():
             submission_link = f"https://codeforces.com/submission/{submission_id}"
 
         message = (
-            "🟢 Green detected for today!\n\n"
+            "🟢 Green detected (recent submission)!\n\n"
             f"⏰ Time: {time_str} IST\n"
             f"📘 Problem: {problem_index}. {problem_name}\n"
             f"🔗 Problem: {problem_link}\n"
@@ -80,12 +82,14 @@ def main():
         )
 
         send_message(message)
+
+        # save today's notification state
         write_last_notified(today_str)
 
         print("NOTIFIED")
 
     else:
-        print("No green yet or already notified.")
+        print("No recent submission or already notified.")
 
 
 if __name__ == "__main__":
