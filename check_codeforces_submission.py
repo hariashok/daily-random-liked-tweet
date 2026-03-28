@@ -1,15 +1,12 @@
 import os
 import requests
-from datetime import datetime, timezone, timedelta
 
 TELEGRAM_BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN")
 TELEGRAM_CHAT_ID = os.environ.get("TELEGRAM_CHAT_ID")
 
 HANDLE = "envariant"
 
-IST = timezone(timedelta(hours=5, minutes=30))
-
-STATE_FILE = "state/last_notified.txt"
+STATE_FILE = "state/last_submission_id.txt"
 
 
 def send_message(text):
@@ -17,12 +14,12 @@ def send_message(text):
     requests.post(url, data={"chat_id": TELEGRAM_CHAT_ID, "text": text})
 
 
-def get_submissions():
-    url = f"https://codeforces.com/api/user.status?handle={HANDLE}&from=1&count=50"
-    return requests.get(url).json()["result"]
+def get_latest_submission():
+    url = f"https://codeforces.com/api/user.status?handle={HANDLE}&from=1&count=1"
+    return requests.get(url).json()["result"][0]
 
 
-def read_last_notified():
+def read_last_submission_id():
     try:
         with open(STATE_FILE, "r") as f:
             return f.read().strip()
@@ -30,52 +27,36 @@ def read_last_notified():
         return ""
 
 
-def write_last_notified(date_str):
+def write_last_submission_id(sub_id):
     os.makedirs("state", exist_ok=True)
     with open(STATE_FILE, "w") as f:
-        f.write(date_str)
+        f.write(str(sub_id))
 
 
 def main():
-    now_ist = datetime.now(IST)
-    today_str = str(now_ist.date())
+    submission = get_latest_submission()
 
-    # 🔥 KEY FIX: last 24 hours window
-    cutoff_time = now_ist - timedelta(hours=24)
+    current_id = str(submission["id"])
+    last_id = read_last_submission_id()
 
-    submissions = get_submissions()
-    last_notified = read_last_notified()
-
-    found_recent = None
-
-    for sub in submissions:
-        ts = sub["creationTimeSeconds"]
-        sub_dt = datetime.fromtimestamp(ts, IST)
-
-        if sub_dt >= cutoff_time:
-            found_recent = sub
-            break
-
-    if found_recent and last_notified != today_str:
-        problem = found_recent["problem"]
+    # 🔥 KEY LOGIC
+    if current_id != last_id:
+        problem = submission["problem"]
         problem_name = problem["name"]
         contest_id = problem.get("contestId", "N/A")
         problem_index = problem.get("index", "")
-        submission_id = found_recent["id"]
 
-        sub_dt = datetime.fromtimestamp(found_recent["creationTimeSeconds"], IST)
-        time_str = sub_dt.strftime("%I:%M %p")
+        time_str = submission["creationTimeSeconds"]
 
         if contest_id != "N/A":
             problem_link = f"https://codeforces.com/contest/{contest_id}/problem/{problem_index}"
-            submission_link = f"https://codeforces.com/contest/{contest_id}/submission/{submission_id}"
+            submission_link = f"https://codeforces.com/contest/{contest_id}/submission/{current_id}"
         else:
             problem_link = "N/A"
-            submission_link = f"https://codeforces.com/submission/{submission_id}"
+            submission_link = f"https://codeforces.com/submission/{current_id}"
 
         message = (
-            "🟢 Green detected (recent submission)!\n\n"
-            f"⏰ Time: {time_str} IST\n"
+            "🟢 New submission detected!\n\n"
             f"📘 Problem: {problem_index}. {problem_name}\n"
             f"🔗 Problem: {problem_link}\n"
             f"🔗 Submission: {submission_link}"
@@ -83,13 +64,12 @@ def main():
 
         send_message(message)
 
-        # save today's notification state
-        write_last_notified(today_str)
+        write_last_submission_id(current_id)
 
         print("NOTIFIED")
 
     else:
-        print("No recent submission or already notified.")
+        print("No new submission.")
 
 
 if __name__ == "__main__":
