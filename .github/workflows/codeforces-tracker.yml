@@ -1,4 +1,4 @@
-name: Codeforces Green Tracker
+name: Codeforces Submission Tracker
 
 on:
   schedule:
@@ -39,6 +39,6 @@ jobs:
         git config user.name "github-actions"
         git config user.email "github-actions@github.com"
         git pull
-        git add state/last_notified.txt
-        git commit -m "update last notified"
+        git add state/last_submission_id.txt
+        git commit -m "update last submission id"
         git push
