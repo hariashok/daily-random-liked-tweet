@@ -39,14 +39,11 @@ def main():
     current_id = str(submission["id"])
     last_id = read_last_submission_id()
 
-    # 🔥 KEY LOGIC
     if current_id != last_id:
         problem = submission["problem"]
         problem_name = problem["name"]
         contest_id = problem.get("contestId", "N/A")
         problem_index = problem.get("index", "")
-
-        time_str = submission["creationTimeSeconds"]
 
         if contest_id != "N/A":
             problem_link = f"https://codeforces.com/contest/{contest_id}/problem/{problem_index}"
@@ -63,7 +60,6 @@ def main():
         )
 
         send_message(message)
-
         write_last_submission_id(current_id)
 
         print("NOTIFIED")
