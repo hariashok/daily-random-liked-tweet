@@ -47,8 +47,9 @@ def main():
         "even if things go wrong, let's fight,\n"
         "REMEMBER: no one is watching you (what you thing all time) ,\n"
         "REMEMBER: it gonna take 6 complete month, do it or don't - time will pass anyway \n"
-        "Please spend 2hr min daily, you can't make ton of progress, initially,\n"
+        "Please spend 2hr min daily on weekdays, you can't make ton of progress, initially,\n"
         "It will get better as time goes by\n\n\n"
+        "saturday sunday spend max 5 hr for learnig (your self will thank future) \n"
         "and\n\n"
         "and\n\n"
         "and\n\n"
@@ -56,7 +57,12 @@ def main():
         "Hari, if you don't actively shape the life you desire each day, \n "
         "you'll eventually wake up to find that years have slipped by unnoticed..."
         "After you read this, if no action has been taken, we can't save you.."
-        "SORRY"
+        "SORRY\n"
+        "still fear, what are you afraid of?\n\n "
+        "Death? Guaranteed."
+        "Shame? Forgotten in a week.\n"
+        "Lost everything? Rebuild.\n\n"
+        "There is nothing to fear. Keep climbing\n"
     )
 
     send_message(msg)
