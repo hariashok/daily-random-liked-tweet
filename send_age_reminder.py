@@ -59,10 +59,12 @@ def main():
         "After you read this, if no action has been taken, we can't save you.."
         "SORRY\n"
         "still fear, what are you afraid of?\n\n "
-        "Death? Guaranteed."
+        "Death? Guaranteed.\n"
         "Shame? Forgotten in a week.\n"
         "Lost everything? Rebuild.\n\n"
         "There is nothing to fear. Keep climbing\n"
+        "so \n"
+        "dont tolerate fear, inaction and doubts\n"
     )
 
     send_message(msg)
